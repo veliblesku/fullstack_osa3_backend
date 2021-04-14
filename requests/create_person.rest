@@ -1,7 +1,7 @@
-POST http://localhost:3001/api/persons
+POST https://backendosa3.herokuapp.com/api/persons
 Content-Type: application/json
 
 {
-    "name": "",
+    "name": "Aku Ankka",
     "number": "12341231"
 }

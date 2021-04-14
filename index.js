@@ -4,6 +4,8 @@ const app = express()
 var morgan = require('morgan')
 const cors = require('cors')
 
+app.use(express.static('build'))
+
 morgan.token('body', request => JSON.stringify(request.body))
 
 app.use(express.json())
@@ -36,7 +38,7 @@ let persons = [
 
 
 const generateId = () => {
-    const id = Math.random(1000000000)
+    const id = Math.floor(Math.random(1000000000))
     return id
 }
 
