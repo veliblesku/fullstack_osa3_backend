@@ -13,7 +13,7 @@ const getNumber = process.argv[4]
 
 const url =
   `mongodb+srv://blese:${password}@cluster0.3stjy.mongodb.net/phonebook-app?retryWrites=true&w=majority`
-  
+
 //mongoose.connect(url, { useNewUrlParser: true })
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 const personSchema = new mongoose.Schema({
@@ -24,25 +24,26 @@ const personSchema = new mongoose.Schema({
 const Person = mongoose.model('Person', personSchema)
 
 const person = new Person({
-    name: getName,
-    number: getNumber
-    
+  name: getName,
+  number: getNumber
+
 })
 if (getName===undefined) {
-    console.log("Phonebook: ")
-    Person.find({}).then(result => {
-        result.forEach(person => {
-            console.log(`${person.name} ${person.number}`)
-        })
-        mongoose.connection.close()
-      })
+  console.log('Phonebook: ')
+  Person.find({}).then(result => {
+    result.forEach(person => {
+      console.log(`${person.name} ${person.number}`)
+    })
+    mongoose.connection.close()
+  })
 
 } else {
 
-    person.save().then(response => {
-        console.log(`added ${person.name} number ${person.number} to phonebook`);
-        mongoose.connection.close();
-      })
+  person.save().then(response => {
+    console.log(response.data)
+    console.log(`added ${person.name} number ${person.number} to phonebook`)
+    mongoose.connection.close()
+  })
 
 }
 
